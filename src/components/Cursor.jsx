@@ -56,12 +56,11 @@ const LargeCursor = styled(StyledCursor)`
   top: -15px;
 
   color: ${props => (props.isFixed ? props.accent : props.colorOverride || props.color)};
-  border: 1px solid currentColor;
-  box-shadow: inset 0 0 1px 0 currentColor, 0 0 1px 0 currentColor;
+  border: 3px solid currentColor;
   opacity: ${props => (props.isFixed ? 1 : 0.5)};
 
   transition-property: color, opacity, width, height, left, top;
-  transition-duration: 0.2s;
+  transition-duration: ${props => (props.isFixed ? 0.2 : 0.4)}s;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
   will-change: width, height, left, top;
   transform: translateZ(0);
@@ -71,10 +70,10 @@ const LargeCursor = styled(StyledCursor)`
   ${props => props.isClicked
     && !props.isFixed
     && css`
-      width: 20px !important;
-      height: 20px !important;
-      left: -10px !important;
-      top: -10px !important;
+      width: 40px !important;
+      height: 40px !important;
+      left: -20px !important;
+      top: -20px !important;
 
       opacity: 0;
     `}

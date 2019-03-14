@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import CursorLink from './CursorLink';
 import FeatherIcon from './FeatherIcon';
@@ -20,6 +21,7 @@ const Nav = styled.nav`
   font-size: 1rem;
   background-color: ${Neutrals.white.medium};
 
+  overflow-y: auto;
   z-index: 900;
 
   &:hover,
@@ -58,12 +60,10 @@ const NavList = styled.ul`
   align-items: stretch;
   padding: 1em 0;
   margin: 0;
+  flex-shrink: 0;
 
   list-style: none;
-  ${props => props.background
-    && css`
-      background-color: ${props.background};
-    `}
+  background-color: ${props => props.background};
 `;
 
 const NavItem = styled.li`
@@ -71,6 +71,7 @@ const NavItem = styled.li`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  flex-shrink: 0;
 
   color: #2f3542;
   white-space: nowrap;
@@ -100,47 +101,51 @@ const NavItem = styled.li`
 `;
 
 const LINKS = [
-  { title: 'Home', href: '#home', icon: 'home' },
-  { title: 'Skills', href: '#skills', icon: 'book-open' },
-  { title: 'Projects', href: '#projects', icon: 'code' },
-  { title: 'Experience', href: '#experience', icon: 'briefcase' },
-  { title: 'Contact me', href: '#contact', icon: 'mail' },
+  { title: 'navbar.home', href: '#home', icon: 'home' },
+  { title: 'navbar.skills', href: '#skills', icon: 'book-open' },
+  { title: 'navbar.projects', href: '#projects', icon: 'code' },
+  { title: 'navbar.experience', href: '#experience', icon: 'briefcase' },
+  { title: 'navbar.contact', href: '#contact', icon: 'mail' },
 ];
 
-const Navbar = ({ color, accent }) => (
-  <Nav>
-    {/* Logo */}
-    <NavList>
-      {LINKS.map(link => (
-        <NavItem key={link.href}>
+const Navbar = ({ color, accent }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Nav>
+      {/* Logo */}
+      <NavList>
+        {LINKS.map(link => (
+          <NavItem key={link.href}>
+            <CursorLink
+              href={link.href}
+              color={color}
+              accent={accent}
+              targetOpacity={0.75}
+              additionalChildren={<span>{t(link.title)}</span>}
+            >
+              <FeatherIcon name={link.icon} size="1.5em" />
+            </CursorLink>
+          </NavItem>
+        ))}
+      </NavList>
+      <NavList background={Neutrals.white.dark}>
+        <NavItem>
           <CursorLink
-            href={link.href}
+            href="https://github.com/Schlipak/schlipak.github.io"
             color={color}
             accent={accent}
             targetOpacity={0.75}
-            additionalChildren={<span>{link.title}</span>}
+            additionalChildren={<span>{t('navbar.github')}</span>}
+            external
           >
-            <FeatherIcon name={link.icon} size="1.5em" />
+            <FeatherIcon name="github" size="1.5em" />
           </CursorLink>
         </NavItem>
-      ))}
-    </NavList>
-    <NavList background={Neutrals.white.dark}>
-      <NavItem>
-        <CursorLink
-          href="https://github.com/Schlipak/schlipak.github.io"
-          color={color}
-          accent={accent}
-          targetOpacity={0.75}
-          additionalChildren={<span>See on GitHub</span>}
-          external
-        >
-          <FeatherIcon name="github" size="1.5em" />
-        </CursorLink>
-      </NavItem>
-    </NavList>
-  </Nav>
-);
+      </NavList>
+    </Nav>
+  );
+};
 
 Navbar.propTypes = {
   color: PropTypes.string,

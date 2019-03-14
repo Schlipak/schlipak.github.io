@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, {
+  useState, useRef, forwardRef, useImperativeHandle,
+} from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { Colors, Neutrals, Theme } from '../../constants';
 
@@ -125,6 +128,11 @@ const StyledInput = styled.input`
       z-index: 100;
     }
   }
+
+  &:invalid,
+  &:-moz-submit-invalid {
+    box-shadow: none;
+  }
 `;
 
 const StyledInputWithTextarea = StyledInput.withComponent('textarea');
@@ -140,23 +148,27 @@ const StyledTextarea = styled(StyledInputWithTextarea)`
 const hasError = (input, type) => {
   if (type === 'email') {
     if (!input || !input.match(/^[^@]+@[^@]+$/)) {
-      return { has: true, text: 'Please input a valid email address' };
+      return { has: true, key: 'form.input.errors.email' };
     }
   }
 
   if (!input && !input.length) {
-    return { has: true, text: 'Please fill out this field' };
+    return { has: true, key: 'form.input.errors.required' };
   }
 
-  return { has: false, text: 'No error' };
+  return { has: false, key: 'form.input.errors.none' };
 };
 
-const Input = ({
+const Input = forwardRef(({
   children, type, name, required,
-}) => {
+}, ref) => {
+  const { t } = useTranslation();
+
+  const selfRef = useRef();
+
   const [value, setValue] = useState('');
   const [focused, setFocused] = useState(false);
-  const [error, setError] = useState({ has: false, text: 'No error' });
+  const [error, setError] = useState({ has: false, key: 'form.input.errors.none' });
 
   const validate = (newValue = value) => {
     const newError = hasError(newValue, type);
@@ -166,6 +178,8 @@ const Input = ({
     } else {
       setError({ ...error, has: false });
     }
+
+    return !newError.has;
   };
 
   const validateAndUpdate = (newValue) => {
@@ -176,10 +190,27 @@ const Input = ({
     }
   };
 
-  const validateAndSetFocused = (state) => {
+  const validateAndBlur = () => {
     validate();
-    setFocused(state);
+    setFocused(false);
   };
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      validate: () => {
+        const valid = validate();
+
+        if (!valid) {
+          selfRef.current.focus();
+        }
+
+        return valid;
+      },
+      clear: () => setValue(''),
+    }),
+    [value],
+  );
 
   return (
     <InputWrapper>
@@ -192,9 +223,10 @@ const Input = ({
             name={name}
             value={value}
             required={required}
-            onFocus={() => validateAndSetFocused(true)}
-            onBlur={() => validateAndSetFocused(false)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => validateAndBlur()}
             onChange={event => validateAndUpdate(event.target.value)}
+            ref={selfRef}
           />
         )}
         {type !== 'textarea' && (
@@ -203,16 +235,17 @@ const Input = ({
             name={name}
             value={value}
             required={required}
-            onFocus={() => validateAndSetFocused(true)}
-            onBlur={() => validateAndSetFocused(false)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => validateAndBlur()}
             onChange={event => validateAndUpdate(event.target.value)}
+            ref={selfRef}
           />
         )}
       </Label>
-      <LabelError error={error.has}>{error.text}</LabelError>
+      <LabelError error={error.has}>{t(error.key)}</LabelError>
     </InputWrapper>
   );
-};
+});
 
 Input.propTypes = {
   children: PropTypes.node,

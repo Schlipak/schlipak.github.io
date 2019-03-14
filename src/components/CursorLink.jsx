@@ -50,7 +50,7 @@ const TargetInner = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 1.5em;
+  padding: ${props => props.padding};
 
   opacity: ${props => props.targetOpacity};
   outline: none;
@@ -102,6 +102,7 @@ const CursorLink = ({
   color,
   accent,
   className,
+  padding,
 
   setCursorTarget: setCursorTargetAction,
   removeCursorTarget: removeCursorTargetAction,
@@ -138,7 +139,12 @@ const CursorLink = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <TargetInner ref={targetZoneRef} tabIndex="-1" targetOpacity={targetOpacity}>
+      <TargetInner
+        ref={targetZoneRef}
+        tabIndex="-1"
+        targetOpacity={targetOpacity}
+        padding={padding}
+      >
         {children}
       </TargetInner>
       {additionalChildren}
@@ -158,6 +164,7 @@ CursorLink.propTypes = {
   color: PropTypes.string,
   accent: PropTypes.string,
   className: PropTypes.string,
+  padding: PropTypes.string,
 
   setCursorTarget: PropTypes.func.isRequired,
   removeCursorTarget: PropTypes.func.isRequired,
@@ -178,6 +185,7 @@ CursorLink.defaultProps = {
   color: Neutrals.white.lighter,
   accent: Theme.primary.light,
   className: '',
+  padding: '1.5em',
 
   onClick: undefined,
   onMouseEnter: undefined,

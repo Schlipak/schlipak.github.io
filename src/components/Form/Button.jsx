@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
 import { Theme, Neutrals } from '../../constants';
 
 const StyledButton = styled.button`
@@ -42,15 +43,26 @@ const StyledButton = styled.button`
   }
 
   > *:not(:last-child) {
-    margin-right: 0.5em;
+    margin-inline-end: 0.5em;
   }
 `;
 
 // eslint-disable-next-line react/button-has-type
 const Button = ({
-  children, type, backgroundColor, textColor,
+  children,
+  type,
+
+  onClick,
+
+  backgroundColor,
+  textColor,
 }) => (
-  <StyledButton type={type} backgroundColor={backgroundColor} textColor={textColor}>
+  <StyledButton
+    type={type}
+    backgroundColor={backgroundColor}
+    textColor={textColor}
+    onClick={onClick}
+  >
     {children}
   </StyledButton>
 );
@@ -58,6 +70,9 @@ const Button = ({
 Button.propTypes = {
   children: PropTypes.node,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
+
+  onClick: PropTypes.func,
+
   backgroundColor: PropTypes.arrayOf(PropTypes.string),
   textColor: PropTypes.string,
 };
@@ -65,6 +80,9 @@ Button.propTypes = {
 Button.defaultProps = {
   children: null,
   type: 'button',
+
+  onClick: null,
+
   backgroundColor: [Theme.primary.light, Theme.primary.dark],
   textColor: Neutrals.white.lighter,
 };

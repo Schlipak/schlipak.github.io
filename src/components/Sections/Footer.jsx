@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import CursorLink from '../CursorLink';
 
 import { Neutrals, Theme } from '../../constants';
-import FeatherIcon from '../FeatherIcon';
 
 const Footer = styled.footer`
   display: flex;
   position: relative;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   bottom: 0;
   right: 0;
@@ -25,25 +25,45 @@ const Footer = styled.footer`
   }
 `;
 
+const LangLabel = styled.span`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5em;
+  height: 1.5em;
+
+  text-transform: uppercase;
+
+  ${props => props.isCurrent
+    && css`
+      color: ${Theme.primary.dark};
+    `}
+`;
+
+const languages = ['fr', 'en'];
+
 export default () => {
-  const currentYear = new Date().getFullYear();
+  const { i18n } = useTranslation();
+  const { language } = i18n;
 
   return (
     <Footer>
       <div>
-        &copy;&nbsp;
-        {currentYear}
-      </div>
-      <div>
-        <CursorLink
-          href=""
-          color={Neutrals.black.dark}
-          accent={Theme.primary.light}
-          targetOpacity={0.75}
-          external
-        >
-          <FeatherIcon name="feather" size="1.5em" />
-        </CursorLink>
+        {languages.map(lang => (
+          <CursorLink
+            key={lang}
+            href={`#lang-${lang}`}
+            color={Neutrals.black.dark}
+            accent={Theme.primary.light}
+            targetOpacity={0.75}
+            onClick={(event) => {
+              event.preventDefault();
+              i18n.changeLanguage(lang);
+            }}
+          >
+            <LangLabel isCurrent={lang === language.split('-')[0]}>{lang}</LangLabel>
+          </CursorLink>
+        ))}
       </div>
     </Footer>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -25,7 +26,7 @@ const HeroContainer = styled.section`
   transform-origin: center;
   transform: translateZ(-2px) scale(3);
 
-  z-index: -1;
+  z-index: 0;
 
   @-moz-document url-prefix() {
     & {
@@ -55,9 +56,9 @@ const HeroTitle = styled.h1`
   }
 
   & > .sub {
-    font-size: 50%;
+    font-size: 35%;
     font-weight: normal;
-    font-variant: small-caps;
+    text-transform: uppercase;
     color: #dfe4ea;
 
     font-display: swap;
@@ -68,9 +69,11 @@ const HeroTitle = styled.h1`
       content: '';
       display: block;
       position: relative;
-      width: 100%;
+      left: 1em;
+      width: calc(100% - 2em);
       height: 2px;
       margin: 0.5em 0;
+      margin-bottom: 1em;
 
       background-color: #dfe4ea;
       border-radius: 2px;
@@ -82,20 +85,24 @@ const Hero = ({
   title,
   setCursorColor: setCursorColorAction,
   resetCursorColor: resetCursorColorAction,
-}) => (
-  <HeroContainer
-    onMouseEnter={() => setCursorColorAction('#f1f2f6')}
-    onMouseLeave={resetCursorColorAction}
-  >
-    <HeroImage src={['/img/toulouse.webp']} fallback="/img/toulouse.jpg" alt="Toulouse" />
-    <HeroTitle>
-      <>
-        <span>{title}</span>
-        <span className="sub">Web developer</span>
-      </>
-    </HeroTitle>
-  </HeroContainer>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <HeroContainer
+      onMouseEnter={() => setCursorColorAction('#f1f2f6')}
+      onMouseLeave={resetCursorColorAction}
+    >
+      <HeroImage src={['/img/toulouse.webp']} fallback="/img/toulouse.jpg" alt="Toulouse" />
+      <HeroTitle>
+        <>
+          <span>{title}</span>
+          <span className="sub">{t('header.title')}</span>
+        </>
+      </HeroTitle>
+    </HeroContainer>
+  );
+};
 
 Hero.propTypes = {
   title: PropTypes.string.isRequired,

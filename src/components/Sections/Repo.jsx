@@ -137,6 +137,7 @@ const RepoTitle = styled.h2`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  text-align: start;
 
   > .main {
     display: inline-flex;
@@ -144,13 +145,14 @@ const RepoTitle = styled.h2`
     align-items: center;
 
     > span:nth-child(2) {
-      margin-left: 0.25em;
+      margin: 0 0.25em;
     }
   }
 
   > .sub {
     font-size: 0.8em;
     font-weight: normal;
+    text-align: start;
   }
 `;
 
@@ -169,14 +171,10 @@ const RepoStats = styled.section`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0;
-
-    &:not(:last-of-type) {
-      margin-right: 1.5em;
-    }
+    margin: 0 0.5em;
 
     > figcaption {
-      margin-left: 0.35em;
+      margin: 0 0.35em;
     }
   }
 `;

@@ -42,5 +42,5 @@ export const Neutrals = {
 
 export const Theme = {
   primary: Colors.blue,
-  accent: Colors.yellow,
+  shades: [Colors.red.light, Colors.cyan.light, Colors.blue.dark],
 };

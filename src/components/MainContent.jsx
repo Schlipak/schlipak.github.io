@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import Hero from './Sections/Hero';
 import RepoList from './Sections/RepoList';
@@ -20,7 +21,6 @@ const MainWrapper = styled.main`
   perspective: 1px;
   transform-style: preserve-3d;
 
-  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
@@ -38,23 +38,27 @@ const MainContainer = styled.section`
   top: 0;
   left: 0;
   width: 100%;
-  padding-top: 2em;
 
   background-color: ${Neutrals.white.light};
   color: ${Neutrals.black.dark};
+
+  overflow-x: hidden;
 `;
 
-export default () => (
-  <MainWrapper>
-    <ScrollSnap id="home" />
-    <Hero title="Guillaume de&nbsp;Matos" />
-    <MainContainer>
-      <ScrollSnap />
-      <ScrollSnap id="projects" />
-      <RepoList />
-      <ScrollSnap id="contact" />
-      <ContactForm />
-    </MainContainer>
-    <Footer />
-  </MainWrapper>
-);
+export default () => {
+  const { t } = useTranslation();
+
+  return (
+    <MainWrapper>
+      <ScrollSnap id="home" />
+      <Hero title="Guillaume de&nbsp;Matos" />
+      <MainContainer>
+        <ScrollSnap id="contentTop" />
+        <p>{t('hello')}</p>
+        <RepoList id="projects" />
+        <ContactForm id="contact" />
+      </MainContainer>
+      <Footer />
+    </MainWrapper>
+  );
+};

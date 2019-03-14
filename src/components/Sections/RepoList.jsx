@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,6 +12,11 @@ import ResponsiveContainer from '../ResponsiveContainer';
 import Repo from './Repo';
 import FeatherIcon from '../FeatherIcon';
 import { Colors, Neutrals } from '../../constants';
+
+const RepoListContainer = styled.div`
+  position: relative;
+  text-align: center;
+`;
 
 const SectionList = ResponsiveContainer();
 const List = styled(SectionList)`
@@ -24,24 +30,22 @@ const List = styled(SectionList)`
   @media screen and (max-width: 1400px) {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
-
-    margin: 0 1rem;
+    margin: 0;
   }
 
   @media screen and (max-width: 900px) {
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
-
-    margin: 0 1rem;
+    margin: 0;
   }
 `;
 
 const PALETTE = [
   { from: Colors.orange.light, to: Colors.orange.dark },
-  { from: Colors.yellow.light, to: Colors.yellow.dark },
   { from: Colors.green.light, to: Colors.green.dark },
-  { from: Colors.blue.light, to: Colors.blue.dark },
   { from: Colors.red.light, to: Colors.red.dark },
+  { from: Colors.blue.light, to: Colors.blue.dark },
+  { from: Colors.yellow.light, to: Colors.yellow.dark },
 ];
 
 const renderRepoContents = repo => (
@@ -89,6 +93,8 @@ const renderRepoContents = repo => (
 );
 
 const RepoList = ({
+  id,
+
   repos,
   loading,
   error,
@@ -96,12 +102,14 @@ const RepoList = ({
   setCursorColor: setCursorColorAction,
   resetCursorColor: resetCursorColorAction,
 }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     fetchReposAction();
   }, []);
 
   return (
-    <>
+    <RepoListContainer id={id}>
       <h2>Projects</h2>
       <List>
         {repos
@@ -149,13 +157,15 @@ const RepoList = ({
           onMouseLeave={resetCursorColorAction}
           center
         >
-          <h2>See more</h2>
+          <h2>{t('repos.seeMore')}</h2>
         </Repo>
       </List>
-    </>
+    </RepoListContainer>
   );
 };
 RepoList.propTypes = {
+  id: PropTypes.string,
+
   repos: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.objectOf(PropTypes.any),
@@ -166,6 +176,7 @@ RepoList.propTypes = {
 };
 
 RepoList.defaultProps = {
+  id: null,
   error: null,
 };
 
