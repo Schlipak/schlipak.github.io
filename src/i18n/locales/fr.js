@@ -1,12 +1,12 @@
 export default {
   translations: {
-    hello: 'Coucou',
     navbar: {
       home: 'Accueil',
-      skills: 'Compétences',
-      projects: 'Projets',
+      profile: 'About me',
+      education: 'Formation',
       experience: 'Expérience',
-      contact: 'Contact',
+      projects: 'Projets',
+      contact: 'Me contacter',
       github: 'Voir sur GitHub',
     },
     header: {

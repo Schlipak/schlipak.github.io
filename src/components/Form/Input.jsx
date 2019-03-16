@@ -34,7 +34,10 @@ const Label = styled.label`
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
   margin-top: 2em;
-  cursor: none;
+
+  @media screen and (min-width: 1025px) {
+    cursor: none;
+  }
 
   ${props => props.focused
     && css`
@@ -118,7 +121,10 @@ const StyledInput = styled.input`
   overflow: hidden;
 
   font-size: 1em;
-  cursor: none;
+
+  @media screen and (min-width: 1025px) {
+    cursor: none;
+  }
 
   &:-webkit-autofill {
     &,

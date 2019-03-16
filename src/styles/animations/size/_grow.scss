@@ -1,0 +1,53 @@
+@keyframes growHorizontal {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes growVertical {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@mixin growHorizontal {
+  animation-name: growHorizontal;
+  animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+@mixin growVertical {
+  animation-name: growVertical;
+  animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+.growRight {
+  transform-origin: left;
+  @include growHorizontal();
+}
+
+.growLeft {
+  transform-origin: right;
+  @include growHorizontal();
+}
+
+.growUp {
+  transform-origin: bottom;
+  @include growVertical();
+}
+
+.growDown {
+  transform-origin: top;
+  @include growVertical();
+}

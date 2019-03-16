@@ -9,7 +9,7 @@ export default (component = 'section') => styled(component)`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2em;
+  padding: 2em 0;
 
   @media screen and (max-width: 1400px) {
     max-width: 1000px;

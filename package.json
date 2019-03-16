@@ -10,6 +10,7 @@
     "polished": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
+    "react-animate-on-scroll": "^2.1.5",
     "react-dom": "^16.8.0",
     "react-i18next": "^10.2.0",
     "react-redux": "^6.0.0",

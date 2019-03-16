@@ -9,8 +9,12 @@ import Input from './Input';
 import FeatherIcon from '../FeatherIcon';
 
 import { Neutrals } from '../../constants';
+import SectionTitle from '../SectionTitle';
 
-const Form = ResponsiveContainer('form');
+const ContactWrapper = ResponsiveContainer();
+const Form = styled(ResponsiveContainer('form'))`
+  padding-top: 0;
+`;
 
 const HiddenInput = styled.input`
   display: none;
@@ -58,37 +62,40 @@ const ContactForm = ({ id }) => {
   };
 
   return (
-    <Form id={id} onSubmit={handleSubmit} onInvalid={handleSubmit}>
-      <Input name="name" type="text" required ref={nameRef}>
-        {t('form.fields.name')}
-      </Input>
-      <Input name="_replyto" type="email" required ref={emailRef}>
-        {t('form.fields.email')}
-      </Input>
-      <Input name="message" type="textarea" required ref={messageRef}>
-        {t('form.fields.message')}
-      </Input>
+    <ContactWrapper>
+      <SectionTitle>{t('navbar.contact')}</SectionTitle>
+      <Form id={id} onSubmit={handleSubmit} onInvalid={handleSubmit}>
+        <Input name="name" type="text" required ref={nameRef}>
+          {t('form.fields.name')}
+        </Input>
+        <Input name="_replyto" type="email" required ref={emailRef}>
+          {t('form.fields.email')}
+        </Input>
+        <Input name="message" type="textarea" required ref={messageRef}>
+          {t('form.fields.message')}
+        </Input>
 
-      <input type="hidden" name="_subject" value="Contact Schlipak.github.io" />
-      <input type="hidden" name="_next" value="https://schlipak.github.io" />
-      <HiddenInput type="text" name="_gotcha" />
+        <input type="hidden" name="_subject" value="Contact Schlipak.github.io" />
+        <input type="hidden" name="_next" value="https://schlipak.github.io" />
+        <HiddenInput type="text" name="_gotcha" />
 
-      <FormControls>
-        <Button
-          type="reset"
-          backgroundColor={[Neutrals.white.medium, Neutrals.white.dark]}
-          textColor={Neutrals.black.dark}
-          onClick={handleClear}
-        >
-          <span>{t('form.controls.clear')}</span>
-        </Button>
+        <FormControls>
+          <Button
+            type="reset"
+            backgroundColor={[Neutrals.white.medium, Neutrals.white.dark]}
+            textColor={Neutrals.black.dark}
+            onClick={handleClear}
+          >
+            <span>{t('form.controls.clear')}</span>
+          </Button>
 
-        <Button type="submit">
-          <FeatherIcon name="send" />
-          <span>{t('form.controls.send')}</span>
-        </Button>
-      </FormControls>
-    </Form>
+          <Button type="submit">
+            <FeatherIcon name="send" />
+            <span>{t('form.controls.send')}</span>
+          </Button>
+        </FormControls>
+      </Form>
+    </ContactWrapper>
   );
 };
 

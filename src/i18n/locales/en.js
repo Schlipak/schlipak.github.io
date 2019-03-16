@@ -1,11 +1,11 @@
 export default {
   translations: {
-    hello: 'Hi',
     navbar: {
       home: 'Home',
-      skills: 'Skills',
-      projects: 'Projects',
+      profile: 'À propros de moi',
+      education: 'Education',
       experience: 'Experience',
+      projects: 'Projects',
       contact: 'Contact me',
       github: 'See on GitHub',
     },

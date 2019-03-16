@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
 import Hero from './Sections/Hero';
 import RepoList from './Sections/RepoList';
@@ -10,6 +9,7 @@ import ContactForm from './Form/ContactForm';
 
 import { Neutrals } from '../constants';
 import Footer from './Sections/Footer';
+import Timeline from './Timeline';
 
 const MainWrapper = styled.main`
   position: relative;
@@ -38,6 +38,7 @@ const MainContainer = styled.section`
   top: 0;
   left: 0;
   width: 100%;
+  padding: 0 2em;
 
   background-color: ${Neutrals.white.light};
   color: ${Neutrals.black.dark};
@@ -45,20 +46,48 @@ const MainContainer = styled.section`
   overflow-x: hidden;
 `;
 
-export default () => {
-  const { t } = useTranslation();
-
-  return (
-    <MainWrapper>
-      <ScrollSnap id="home" />
-      <Hero title="Guillaume de&nbsp;Matos" />
-      <MainContainer>
-        <ScrollSnap id="contentTop" />
-        <p>{t('hello')}</p>
-        <RepoList id="projects" />
-        <ContactForm id="contact" />
-      </MainContainer>
-      <Footer />
-    </MainWrapper>
-  );
-};
+export default () => (
+  <MainWrapper id="main">
+    <ScrollSnap id="home" />
+    <Hero title="Guillaume de&nbsp;Matos" />
+    <MainContainer>
+      <ScrollSnap id="contentTop" />
+      <Timeline
+        events={[
+          {
+            id: 1,
+            name: 'Test',
+            date: 2019,
+            left: false,
+          },
+          {
+            id: 2,
+            name: (
+              <>
+                <p>This is a paragraph</p>
+                <p>This is another</p>
+              </>
+            ),
+            date: 2019,
+            left: true,
+          },
+          {
+            id: 3,
+            name: 'Test',
+            date: 2019,
+            left: false,
+          },
+          {
+            id: 4,
+            name: 'Test',
+            date: 2019,
+            left: true,
+          },
+        ]}
+      />
+      <RepoList id="projects" />
+      <ContactForm id="contact" />
+    </MainContainer>
+    <Footer />
+  </MainWrapper>
+);

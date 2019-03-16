@@ -12,6 +12,7 @@ import ResponsiveContainer from '../ResponsiveContainer';
 import Repo from './Repo';
 import FeatherIcon from '../FeatherIcon';
 import { Colors, Neutrals } from '../../constants';
+import SectionTitle from '../SectionTitle';
 
 const RepoListContainer = styled.div`
   position: relative;
@@ -110,7 +111,7 @@ const RepoList = ({
 
   return (
     <RepoListContainer id={id}>
-      <h2>Projects</h2>
+      <SectionTitle>{t('navbar.projects')}</SectionTitle>
       <List>
         {repos
           .filter(repo => !repo.archived)
