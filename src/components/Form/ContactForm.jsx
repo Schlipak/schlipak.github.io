@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -8,8 +8,11 @@ import Button from './Button';
 import Input from './Input';
 import FeatherIcon from '../FeatherIcon';
 
-import { Neutrals } from '../../constants';
 import SectionTitle from '../SectionTitle';
+import FormAnimation from './FormAnimation';
+
+import { Neutrals } from '../../constants';
+import successAnimation from '../../constants/animation-success';
 
 const ContactWrapper = ResponsiveContainer();
 const Form = styled(ResponsiveContainer('form'))`
@@ -37,10 +40,14 @@ const FormControls = styled.div`
 const ContactForm = ({ id }) => {
   const { t } = useTranslation();
 
+  const [disabled, setDisabled] = useState(false);
+
   const nameRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
   const gotchaRef = useRef();
+
+  const successRef = useRef();
 
   const handleClear = () => {
     nameRef.current.clear();
@@ -56,12 +63,16 @@ const ContactForm = ({ id }) => {
     const { current: message } = messageRef;
     const { current: _gotcha } = gotchaRef;
 
+    const { current: success } = successRef;
+
     const valid = name.validate() && email.validate() && message.validate();
 
     if (valid) {
-      fetch('https://formcarry.com/s/pT8HWQRgJXG', {
+      setDisabled(true);
+
+      fetch('https://usebasin.com/f/c2474e62acfd.json', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           name: name.value,
           email: email.value,
@@ -71,33 +82,50 @@ const ContactForm = ({ id }) => {
       })
         .then((response) => {
           if (response.ok) {
-            console.log('OK!!!');
             handleClear();
+
+            success.show();
+            success.start();
           } else {
             console.log('NOT OK :O');
           }
+
+          setDisabled(false);
         })
         .catch((error) => {
           console.warn(error);
+          setDisabled(false);
         });
     }
 
     return valid;
   };
 
+  const clearAnimation = ({ current: animation }) => {
+    animation.hide();
+    setTimeout(animation.stop, 400);
+  };
+
   return (
     <ContactWrapper>
       <SectionTitle>{t('navbar.contact')}</SectionTitle>
+
       <Form id={id} onSubmit={handleSubmit} onInvalid={handleSubmit}>
-        <Input name="name" type="text" required ref={nameRef}>
+        <FormAnimation
+          animationData={successAnimation}
+          onComplete={() => clearAnimation(successRef)}
+          ref={successRef}
+        />
+
+        <Input name="name" type="text" required ref={nameRef} disabled={disabled}>
           {t('form.fields.name')}
         </Input>
 
-        <Input name="email" type="email" required ref={emailRef}>
+        <Input name="email" type="email" required ref={emailRef} disabled={disabled}>
           {t('form.fields.email')}
         </Input>
 
-        <Input name="message" type="textarea" required ref={messageRef}>
+        <Input name="message" type="textarea" required ref={messageRef} disabled={disabled}>
           {t('form.fields.message')}
         </Input>
 
@@ -109,11 +137,12 @@ const ContactForm = ({ id }) => {
             backgroundColor={[Neutrals.white.medium, Neutrals.white.dark]}
             textColor={Neutrals.black.dark}
             onClick={handleClear}
+            disabled={disabled}
           >
             <span>{t('form.controls.clear')}</span>
           </Button>
 
-          <Button type="submit">
+          <Button type="submit" disabled={disabled}>
             <FeatherIcon name="send" />
             <span>{t('form.controls.send')}</span>
           </Button>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export default (component = 'section') => styled(component)`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;

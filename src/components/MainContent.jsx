@@ -54,7 +54,7 @@ export default () => {
 
   return (
     <MainWrapper id="main">
-      <Hero title="Title" subtitle={t('header.title')} />
+      <Hero title="Guillaume de&nbsp;Matos" subtitle={t('header.title')} />
 
       <MainContainerWrapper>
         <MainContainer>

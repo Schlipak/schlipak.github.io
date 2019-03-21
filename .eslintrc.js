@@ -20,5 +20,7 @@ module.exports = {
     semi: ['error', 'always'],
     'react/jsx-filename-extension': [0],
     'no-return-assign': [0],
+    'import/prefer-default-export': [0],
+    'consistent-return': [0],
   },
 };

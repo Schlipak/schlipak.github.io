@@ -14,6 +14,15 @@ const InputWrapper = styled.div`
   justify-content: flex-start;
   align-items: stretch;
   width: 100%;
+
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  ${props => props.disabled
+    && css`
+      pointer-events: none;
+      opacity: 0.5;
+    `}
 `;
 
 const Label = styled.label`
@@ -166,7 +175,7 @@ const hasError = (input, type) => {
 };
 
 const Input = forwardRef(({
-  children, type, name, required,
+  children, type, name, required, disabled,
 }, ref) => {
   const { t } = useTranslation();
 
@@ -204,6 +213,8 @@ const Input = forwardRef(({
   useImperativeHandle(
     ref,
     () => ({
+      value,
+
       validate: () => {
         const valid = validate();
 
@@ -213,13 +224,14 @@ const Input = forwardRef(({
 
         return valid;
       },
+
       clear: () => setValue(''),
     }),
     [value],
   );
 
   return (
-    <InputWrapper>
+    <InputWrapper disabled={disabled}>
       <Label htmlFor={name} focused={focused} error={error.has}>
         <LabelText focused={focused} hasValue={value} required={required}>
           {children}
@@ -229,6 +241,7 @@ const Input = forwardRef(({
             name={name}
             value={value}
             required={required}
+            disabled={disabled}
             onFocus={() => setFocused(true)}
             onBlur={() => validateAndBlur()}
             onChange={event => validateAndUpdate(event.target.value)}
@@ -241,6 +254,7 @@ const Input = forwardRef(({
             name={name}
             value={value}
             required={required}
+            disabled={disabled}
             onFocus={() => setFocused(true)}
             onBlur={() => validateAndBlur()}
             onChange={event => validateAndUpdate(event.target.value)}
@@ -258,12 +272,14 @@ Input.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
   children: null,
   type: 'text',
   required: false,
+  disabled: false,
 };
 
 export default Input;

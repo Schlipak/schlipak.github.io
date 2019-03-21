@@ -25,7 +25,7 @@ const StyledButton = styled.button`
   box-shadow: 0 0 0 0 transparent, 0 1rem 2rem -0.75rem ${props => props.backgroundColor[1]};
   transform: translateY(0);
 
-  transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform, opacity;
   transition-duration: 0.4s;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
@@ -42,6 +42,11 @@ const StyledButton = styled.button`
     transform: translateY(2px);
   }
 
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
   > *:not(:last-child) {
     margin-inline-end: 0.5em;
   }
@@ -56,12 +61,15 @@ const Button = ({
 
   backgroundColor,
   textColor,
+
+  ...rest
 }) => (
   <StyledButton
     type={type}
     backgroundColor={backgroundColor}
     textColor={textColor}
     onClick={onClick}
+    {...rest}
   >
     {children}
   </StyledButton>
