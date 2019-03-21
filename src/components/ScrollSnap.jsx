@@ -1,8 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export default styled.div`
+const ScrollSnap = styled.div`
   display: block;
+  position: relative;
   width: 100%;
   height: 0;
-  scroll-snap-align: start;
 `;
+
+export default props => <ScrollSnap {...props} />;

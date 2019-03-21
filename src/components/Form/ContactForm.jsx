@@ -40,25 +40,49 @@ const ContactForm = ({ id }) => {
   const nameRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
-
-  const handleSubmit = (event) => {
-    const { current: name } = nameRef;
-    const { current: email } = emailRef;
-    const { current: message } = messageRef;
-
-    const valid = name.validate() && email.validate() && message.validate();
-
-    if (!valid) {
-      event.preventDefault();
-    }
-
-    return valid;
-  };
+  const gotchaRef = useRef();
 
   const handleClear = () => {
     nameRef.current.clear();
     emailRef.current.clear();
     messageRef.current.clear();
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const { current: name } = nameRef;
+    const { current: email } = emailRef;
+    const { current: message } = messageRef;
+    const { current: _gotcha } = gotchaRef;
+
+    const valid = name.validate() && email.validate() && message.validate();
+
+    if (valid) {
+      fetch('https://formcarry.com/s/pT8HWQRgJXG', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          message: message.value,
+          _gotcha: _gotcha.value,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log('OK!!!');
+            handleClear();
+          } else {
+            console.log('NOT OK :O');
+          }
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+    }
+
+    return valid;
   };
 
   return (
@@ -68,16 +92,16 @@ const ContactForm = ({ id }) => {
         <Input name="name" type="text" required ref={nameRef}>
           {t('form.fields.name')}
         </Input>
-        <Input name="_replyto" type="email" required ref={emailRef}>
+
+        <Input name="email" type="email" required ref={emailRef}>
           {t('form.fields.email')}
         </Input>
+
         <Input name="message" type="textarea" required ref={messageRef}>
           {t('form.fields.message')}
         </Input>
 
-        <input type="hidden" name="_subject" value="Contact Schlipak.github.io" />
-        <input type="hidden" name="_next" value="https://schlipak.github.io" />
-        <HiddenInput type="text" name="_gotcha" />
+        <HiddenInput type="text" name="_gotcha" ref={gotchaRef} />
 
         <FormControls>
           <Button

@@ -32,7 +32,7 @@ const TimelineWrapper = styled.ul`
 const TimelineEvent = styled.li`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   grid-gap: 4rem;
   align-items: stretch;
   width: 100%;
@@ -66,6 +66,13 @@ const TimelineContent = styled.div`
   position: relative;
   flex-basis: 1;
   flex-grow: 1;
+  max-width: 30em;
+
+  &.date > span {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: ${Neutrals.black.medium};
+  }
 
   &:first-child {
     align-items: flex-end;
@@ -73,6 +80,7 @@ const TimelineContent = styled.div`
 
   p {
     margin: 0.25em 0;
+    text-align: ${props => (props.left ? 'right' : 'left')};
 
     &:first-child {
       margin-block-start: 0;
@@ -84,22 +92,31 @@ const Timeline = ({ events }) => (
   <TimelineWrapper>
     {events.map((event) => {
       const {
-        id, name, date, left,
+        id, content, date, left,
       } = event;
 
       return (
-        <TimelineEvent key={id}>
-          {left && <TimelineContent>{name}</TimelineContent>}
-          <TimelineContent>{date}</TimelineContent>
-          {!left && <TimelineContent>{name}</TimelineContent>}
+        <TimelineEvent key={id} left={left}>
+          {left && <TimelineContent left={left}>{content}</TimelineContent>}
+          <TimelineContent left={!left} className="date">
+            <span>{date}</span>
+          </TimelineContent>
+          {!left && <TimelineContent left={left}>{content}</TimelineContent>}
         </TimelineEvent>
       );
     })}
   </TimelineWrapper>
 );
 
+const TimelineEventShape = {
+  id: PropTypes.number.isRequired,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  date: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.node]).isRequired,
+  left: PropTypes.bool,
+};
+
 Timeline.propTypes = {
-  events: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)),
+  events: PropTypes.arrayOf(PropTypes.shape(TimelineEventShape)),
 };
 
 Timeline.defaultProps = {

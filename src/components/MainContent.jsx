@@ -1,35 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import Hero from './Sections/Hero';
-import RepoList from './Sections/RepoList';
-
-import ScrollSnap from './ScrollSnap';
-import ContactForm from './Form/ContactForm';
+import { useTranslation } from 'react-i18next';
 
 import { Neutrals } from '../constants';
-import Footer from './Sections/Footer';
+import { education, experience } from '../constants/timelines';
+
+import Hero from './Sections/Hero';
+import ResponsiveContainer from './ResponsiveContainer';
+import SectionTitle from './SectionTitle';
+
+import RepoList from './Sections/RepoList';
+import ContactForm from './Form/ContactForm';
+
 import Timeline from './Timeline';
+import Footer from './Sections/Footer';
+
+const SectionContainer = ResponsiveContainer();
 
 const MainWrapper = styled.main`
   position: relative;
   display: block;
   width: 100%;
-  height: 100%;
+`;
 
-  scroll-snap-type: y proximity;
-  perspective: 1px;
-  transform-style: preserve-3d;
+const MainContainerWrapper = styled.section`
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 100vh;
 
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
+  background-color: transparent;
+  color: ${Neutrals.black.dark};
 
-  pointer-events: all;
   z-index: 200;
 `;
 
-const MainContainer = styled.section`
+const MainContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -41,53 +47,30 @@ const MainContainer = styled.section`
   padding: 0 2em;
 
   background-color: ${Neutrals.white.light};
-  color: ${Neutrals.black.dark};
-
-  overflow-x: hidden;
 `;
 
-export default () => (
-  <MainWrapper id="main">
-    <ScrollSnap id="home" />
-    <Hero title="Guillaume de&nbsp;Matos" />
-    <MainContainer>
-      <ScrollSnap id="contentTop" />
-      <Timeline
-        events={[
-          {
-            id: 1,
-            name: 'Test',
-            date: 2019,
-            left: false,
-          },
-          {
-            id: 2,
-            name: (
-              <>
-                <p>This is a paragraph</p>
-                <p>This is another</p>
-              </>
-            ),
-            date: 2019,
-            left: true,
-          },
-          {
-            id: 3,
-            name: 'Test',
-            date: 2019,
-            left: false,
-          },
-          {
-            id: 4,
-            name: 'Test',
-            date: 2019,
-            left: true,
-          },
-        ]}
-      />
-      <RepoList id="projects" />
-      <ContactForm id="contact" />
-    </MainContainer>
-    <Footer />
-  </MainWrapper>
-);
+export default () => {
+  const { t } = useTranslation();
+
+  return (
+    <MainWrapper id="main">
+      <Hero title="Title" subtitle={t('header.title')} />
+
+      <MainContainerWrapper>
+        <MainContainer>
+          <SectionContainer id="education">
+            <SectionTitle>{t('navbar.education')}</SectionTitle>
+            <Timeline events={education} />
+          </SectionContainer>
+          <SectionContainer id="experience">
+            <SectionTitle>{t('navbar.experience')}</SectionTitle>
+            <Timeline events={experience} />
+          </SectionContainer>
+          <RepoList id="projects" />
+          <ContactForm id="contact" />
+        </MainContainer>
+        <Footer />
+      </MainContainerWrapper>
+    </MainWrapper>
+  );
+};

@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 
 import CursorLink from './CursorLink';
 import FeatherIcon from './FeatherIcon';
+
 import { Neutrals, Theme } from '../constants';
+import links from '../constants/navbar';
 
 const Nav = styled.nav`
   position: fixed;
@@ -61,6 +63,7 @@ const NavList = styled.ul`
   padding: 1em 0;
   margin: 0;
   flex-shrink: 0;
+  width: 100%;
 
   list-style: none;
   background-color: ${props => props.background};
@@ -100,15 +103,6 @@ const NavItem = styled.li`
   }
 `;
 
-const LINKS = [
-  { title: 'navbar.home', href: '#home', icon: 'home' },
-  { title: 'navbar.profile', href: '#profile', icon: 'user' },
-  { title: 'navbar.education', href: '#education', icon: 'book-open' },
-  { title: 'navbar.experience', href: '#experience', icon: 'briefcase' },
-  { title: 'navbar.projects', href: '#projects', icon: 'code' },
-  { title: 'navbar.contact', href: '#contact', icon: 'mail' },
-];
-
 const Navbar = ({ color, accent }) => {
   const { t } = useTranslation();
 
@@ -116,7 +110,7 @@ const Navbar = ({ color, accent }) => {
     <Nav>
       {/* Logo */}
       <NavList>
-        {LINKS.map(link => (
+        {links.map(link => (
           <NavItem key={link.href}>
             <CursorLink
               href={link.href}

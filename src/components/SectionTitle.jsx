@@ -51,7 +51,7 @@ const SectionTitle = ({ children }) => (
   <SectionTitleWrapper>
     <SectionTitleInner>
       <SectionTitleLabel>{children}</SectionTitleLabel>
-      <StyledScrollAnimation animateIn="growRight" scrollableParentSelector="#main" offset={20}>
+      <StyledScrollAnimation animateIn="growRight" offset={20}>
         <SectionTitleHighlight />
       </StyledScrollAnimation>
     </SectionTitleInner>

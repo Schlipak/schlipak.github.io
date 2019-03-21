@@ -18,6 +18,7 @@ const Footer = styled.footer`
   padding: 1em 2em;
 
   background-color: ${Neutrals.white.dark};
+  z-index: 200;
 
   @media screen and (max-width: 900px) {
     font-size: 0.75em;

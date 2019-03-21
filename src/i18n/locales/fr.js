@@ -2,7 +2,7 @@ export default {
   translations: {
     navbar: {
       home: 'Accueil',
-      profile: 'About me',
+      profile: 'À propos de moi',
       education: 'Formation',
       experience: 'Expérience',
       projects: 'Projets',

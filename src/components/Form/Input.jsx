@@ -53,7 +53,7 @@ const Label = styled.label`
 const LabelText = styled.span`
   display: inline-block;
   position: absolute;
-  top: 1.15em;
+  top: 1em;
   left: 1em;
 
   color: ${Neutrals.black.dark};
@@ -70,7 +70,7 @@ const LabelText = styled.span`
 
   ${props => (props.focused || props.hasValue)
     && css`
-      transform: translate(-0.5em, calc(-100% - 1.15em)) scale(0.9);
+      transform: translate(-0.5em, calc(-100% - 1.25em)) scale(0.9);
       opacity: 1;
     `}
 

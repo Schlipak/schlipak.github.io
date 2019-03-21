@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,28 +10,17 @@ import { Theme } from '../../constants';
 import HeroImage from './HeroImage';
 
 const HeroContainer = styled.section`
-  position: relative;
+  position: fixed;
   display: flex;
-  flex: 1 0 auto;
+  top: 0;
+  left: 0;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
 
   background-color: ${Theme.primary.dark};
-
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  transform-origin: center;
-  transform: translateZ(-2px) scale(3);
-
   z-index: 0;
-
-  @-moz-document url-prefix() {
-    & {
-      left: -0.75rem;
-    }
-  }
 `;
 
 const HeroTitle = styled.h1`
@@ -47,7 +35,7 @@ const HeroTitle = styled.h1`
   text-align: center;
   color: #f1f2f6;
 
-  transform: translateZ(0.25px) scale(0.875);
+  z-index: 100;
 
   & > *:not(.sub) {
     font-display: swap;
@@ -83,31 +71,35 @@ const HeroTitle = styled.h1`
 
 const Hero = ({
   title,
+  subtitle,
+
   setCursorColor: setCursorColorAction,
   resetCursorColor: resetCursorColorAction,
-}) => {
-  const { t } = useTranslation();
-
-  return (
-    <HeroContainer
-      onMouseEnter={() => setCursorColorAction('#f1f2f6')}
-      onMouseLeave={resetCursorColorAction}
-    >
-      <HeroImage src={['/img/toulouse.webp']} fallback="/img/toulouse.jpg" alt="Toulouse" />
-      <HeroTitle>
-        <>
-          <span>{title}</span>
-          <span className="sub">{t('header.title')}</span>
-        </>
-      </HeroTitle>
-    </HeroContainer>
-  );
-};
+}) => (
+  <HeroContainer
+    onMouseEnter={() => setCursorColorAction('#f1f2f6')}
+    onMouseLeave={resetCursorColorAction}
+  >
+    <HeroImage src={['/img/toulouse.webp']} fallback="/img/toulouse.jpg" alt="Toulouse" />
+    <HeroTitle>
+      <>
+        <span>{title}</span>
+        <span className="sub">{subtitle}</span>
+      </>
+    </HeroTitle>
+  </HeroContainer>
+);
 
 Hero.propTypes = {
   title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+
   setCursorColor: PropTypes.func.isRequired,
   resetCursorColor: PropTypes.func.isRequired,
+};
+
+Hero.defaultProps = {
+  subtitle: null,
 };
 
 const mapStateToProps = () => ({});
