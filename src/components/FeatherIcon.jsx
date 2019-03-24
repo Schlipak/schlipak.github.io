@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FeatherIcon = ({
-  size, filled, color, name, style,
+  size, filled, color, name, style, ...rest
 }) => (
   <svg
     width={size}
@@ -13,6 +13,7 @@ const FeatherIcon = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     style={style}
+    {...rest}
   >
     <use xlinkHref={`/img/feather-sprite.svg#${name}`} />
   </svg>

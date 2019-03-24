@@ -55,7 +55,7 @@ const LargeCursor = styled(StyledCursor)`
   left: -15px;
   top: -15px;
 
-  color: ${props => (props.isFixed ? props.accent : props.colorOverride || props.color)};
+  color: ${props => (props.isFixed ? props.accentOverride || props.accent : props.colorOverride || props.color)};
   border: 3px solid currentColor;
   opacity: ${props => (props.isFixed ? 1 : 0.5)};
 
@@ -83,6 +83,7 @@ const Cursor = ({
   color,
   colorOverride,
   accent,
+  accentOverride,
 
   target,
   position,
@@ -183,6 +184,7 @@ const Cursor = ({
         color={color}
         colorOverride={colorOverride}
         accent={accent}
+        accentOverride={accentOverride}
         isFixed={target}
         isClicked={isClicked}
       />
@@ -194,6 +196,7 @@ Cursor.propTypes = {
   color: PropTypes.string,
   colorOverride: PropTypes.string,
   accent: PropTypes.string,
+  accentOverride: PropTypes.string,
 
   target: PropTypes.instanceOf(Element),
   position: PropTypes.objectOf(PropTypes.number).isRequired,
@@ -205,6 +208,8 @@ Cursor.defaultProps = {
   color: Neutrals.white.lighter,
   colorOverride: null,
   accent: Theme.primary.light,
+  accentOverride: null,
+
   target: null,
 };
 

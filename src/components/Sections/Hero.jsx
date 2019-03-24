@@ -5,22 +5,29 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { setCursorColor, resetCursorColor } from '../../redux/actions';
-import { Theme } from '../../constants';
 import HeroImage from './HeroImage';
+import CursorLink from '../CursorLink';
+import ScrollArrow from '../ScrollArrow';
+
+import { setCursorColor, resetCursorColor } from '../../redux/actions';
+import { Theme, Neutrals } from '../../constants';
 
 const HeroContainer = styled.section`
   position: fixed;
   display: flex;
   top: 0;
-  left: 0;
+  right: 0;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 6.5em);
 
   background-color: ${Theme.primary.dark};
   z-index: 0;
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const HeroTitle = styled.h1`
@@ -28,6 +35,7 @@ const HeroTitle = styled.h1`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding: 0 0.5em;
   margin: 0;
 
   font-size: 13vmin;
@@ -44,7 +52,7 @@ const HeroTitle = styled.h1`
   }
 
   & > .sub {
-    font-size: 35%;
+    font-size: 40%;
     font-weight: normal;
     text-transform: uppercase;
     color: #dfe4ea;
@@ -69,6 +77,14 @@ const HeroTitle = styled.h1`
   }
 `;
 
+const ScrollDownLink = styled(CursorLink)`
+  position: absolute;
+  bottom: 1.5em;
+  left: 50%;
+
+  transform: translateX(-50%);
+`;
+
 const Hero = ({
   title,
   subtitle,
@@ -87,6 +103,16 @@ const Hero = ({
         <span className="sub">{subtitle}</span>
       </>
     </HeroTitle>
+
+    {/* TODO: Change link to #profile when section is done */}
+    <ScrollDownLink
+      href="#education"
+      targetOpacity={1}
+      color={Neutrals.black.lighter}
+      accent={Neutrals.white.lighter}
+    >
+      <ScrollArrow />
+    </ScrollDownLink>
   </HeroContainer>
 );
 

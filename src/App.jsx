@@ -24,8 +24,8 @@ App.propTypes = {
 };
 
 const mapSizesToProps = ({ width }) => ({
-  isWideScreen: width >= 900,
-  shouldShowCursor: width >= 1025,
+  isWideScreen: width > 900,
+  shouldShowCursor: width > 1366,
 });
 
 export default withSizes(mapSizesToProps)(App);

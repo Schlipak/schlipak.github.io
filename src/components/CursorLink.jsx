@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { setCursorTarget, removeCursorTarget } from '../redux/actions';
+import {
+  setCursorTarget,
+  removeCursorTarget,
+  setCursorAccent,
+  resetCursorAccent,
+} from '../redux/actions';
 
 import { Neutrals, Theme } from '../constants';
 
@@ -106,6 +111,8 @@ const CursorLink = ({
 
   setCursorTarget: setCursorTargetAction,
   removeCursorTarget: removeCursorTargetAction,
+  setCursorAccent: setCursorAccentAction,
+  resetCursorAccent: resetCursorAccentAction,
 
   onClick,
   onMouseEnter,
@@ -117,11 +124,15 @@ const CursorLink = ({
     const { current: targetZone } = targetZoneRef;
 
     setCursorTargetAction(targetZone);
+    setCursorAccentAction(accent);
+
     if (onMouseEnter) onMouseEnter();
   };
 
   const handleMouseLeave = () => {
     removeCursorTargetAction();
+    resetCursorAccentAction();
+
     if (onMouseLeave) onMouseLeave();
   };
 
@@ -168,6 +179,8 @@ CursorLink.propTypes = {
 
   setCursorTarget: PropTypes.func.isRequired,
   removeCursorTarget: PropTypes.func.isRequired,
+  setCursorAccent: PropTypes.func.isRequired,
+  resetCursorAccent: PropTypes.func.isRequired,
 
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
@@ -197,6 +210,8 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     setCursorTarget,
     removeCursorTarget,
+    setCursorAccent,
+    resetCursorAccent,
   },
   dispatch,
 );

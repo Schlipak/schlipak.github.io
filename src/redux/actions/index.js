@@ -8,6 +8,8 @@ import {
   FETCH_REPOS_SUCCESS,
   FETCH_REPOS_FAILURE,
   RESTORE_REPOS_FROM_STORAGE,
+  SET_CURSOR_ACCENT,
+  RESET_CURSOR_ACCENT,
 } from './types';
 
 export * from './types';
@@ -33,6 +35,15 @@ export const setCursorColor = color => ({
 
 export const resetCursorColor = () => ({
   type: RESET_CURSOR_COLOR,
+});
+
+export const setCursorAccent = accent => ({
+  type: SET_CURSOR_ACCENT,
+  payload: { accent },
+});
+
+export const resetCursorAccent = () => ({
+  type: RESET_CURSOR_ACCENT,
 });
 
 export const handleRestoreReposFromStorage = repos => ({

@@ -87,12 +87,13 @@ const ContactForm = ({ id }) => {
             success.show();
             success.start();
           } else {
-            console.log('NOT OK :O');
+            // TODO: Show error message
           }
 
           setDisabled(false);
         })
         .catch((error) => {
+          // TODO: Show error message
           console.warn(error);
           setDisabled(false);
         });

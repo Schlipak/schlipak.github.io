@@ -4,6 +4,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './locales/en';
 import fr from './locales/fr';
 
+export const languages = ['fr', 'en'];
+
 i18n.use(LanguageDetector).init({
   resources: { en, fr },
   fallbackLng: 'en',
