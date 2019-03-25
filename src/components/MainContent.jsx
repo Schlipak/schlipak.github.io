@@ -8,11 +8,9 @@ import { education, experience } from '../constants/timelines';
 import Hero from './Sections/Hero';
 import ResponsiveContainer from './ResponsiveContainer';
 import SectionTitle from './SectionTitle';
-
+import Timeline from './Timeline';
 import RepoList from './Sections/RepoList';
 import ContactForm from './Form/ContactForm';
-
-import Timeline from './Timeline';
 import Footer from './Sections/Footer';
 
 const SectionContainer = ResponsiveContainer();

@@ -118,6 +118,7 @@ const Navbar = ({ color, accent }) => {
               accent={accent}
               targetOpacity={0.75}
               additionalChildren={<span>{t(link.title)}</span>}
+              onClick={link.onClick}
             >
               <FeatherIcon name={link.icon} size="1.5em" />
             </CursorLink>
