@@ -3,10 +3,7 @@ export default [
     title: 'navbar.home',
     href: '#home',
     icon: 'home',
-    onClick: () => {
-      window.scrollTo(0, 0);
-      return false;
-    },
+    onClick: () => window.scrollTo(0, 0),
   },
   { title: 'navbar.profile', href: '#profile', icon: 'user' },
   { title: 'navbar.education', href: '#education', icon: 'book-open' },

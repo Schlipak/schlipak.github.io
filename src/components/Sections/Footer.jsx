@@ -88,6 +88,7 @@ export default () => {
         accent={Theme.primary.light}
         targetOpacity={0.75}
         padding="1.25em"
+        onClick={() => window.scrollTo(0, 0)}
       >
         <ScrollArrow size="2rem" direction="up" />
       </CursorLink>
