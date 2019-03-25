@@ -147,8 +147,8 @@ const Cursor = ({
     const dx = lerp(cx + width / 2, target ? targetX : x, 0.2);
     const dy = lerp(cy + height / 2, target ? targetY : y, 0.2);
 
-    cursor.style.transform = `translate(${x}px, ${y}px)`;
-    circle.style.transform = `translate(${dx}px, ${dy}px)`;
+    cursor.style.transform = `matrix(1, 0, 0, 1, ${x}, ${y})`;
+    circle.style.transform = `translate3D(${dx}px, ${dy}px, 0px)`;
 
     animationFrameId = requestAnimationFrame(updateCursor);
   };
