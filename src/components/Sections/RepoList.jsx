@@ -8,23 +8,25 @@ import { connect } from 'react-redux';
 
 import { fetchRepos, setCursorColor, resetCursorColor } from '../../redux/actions';
 
-import ResponsiveContainer from '../ResponsiveContainer';
 import Repo from './Repo';
 import FeatherIcon from '../FeatherIcon';
-import { Colors, Neutrals } from '../../constants';
 import SectionTitle from '../SectionTitle';
+import ErrorBoundary from '../ErrorBoundary';
+
+import { Colors, Neutrals } from '../../constants';
 
 const RepoListContainer = styled.div`
   position: relative;
   text-align: center;
+  width: 100%;
 `;
 
-const SectionList = ResponsiveContainer();
-const List = styled(SectionList)`
+const List = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   align-items: stretch;
+  width: 100%;
 
   margin: 0 auto;
 
@@ -34,7 +36,7 @@ const List = styled(SectionList)`
     margin: 0;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 700px) {
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
     margin: 0;
@@ -112,55 +114,58 @@ const RepoList = ({
   return (
     <RepoListContainer id={id}>
       <SectionTitle>{t('navbar.projects')}</SectionTitle>
-      <List>
-        {repos
-          .filter(repo => !repo.archived)
-          .slice(0, 8)
-          .map(repo => (
+
+      <ErrorBoundary>
+        <List>
+          {repos
+            .filter(repo => !repo.archived)
+            .slice(0, 8)
+            .map(repo => (
+              <Repo
+                key={repo.id}
+                href={repo.html_url || null}
+                target="_blank"
+                rel="noopener noreferrer"
+                palette={PALETTE}
+                loading={loading}
+                onMouseEnter={() => setCursorColorAction(Neutrals.white.medium)}
+                onMouseLeave={resetCursorColorAction}
+              >
+                {repo.empty && (
+                  <Repo.Stats>
+                    <FeatherIcon
+                      name="more-horizontal"
+                      size="2em"
+                      style={{ filter: 'drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2))' }}
+                    />
+                  </Repo.Stats>
+                )}
+                {!repo.empty && renderRepoContents(repo)}
+              </Repo>
+            ))}
+          {error && (
             <Repo
-              key={repo.id}
-              href={repo.html_url || null}
-              target="_blank"
-              rel="noopener noreferrer"
               palette={PALETTE}
-              loading={loading}
               onMouseEnter={() => setCursorColorAction(Neutrals.white.medium)}
               onMouseLeave={resetCursorColorAction}
+              center
             >
-              {repo.empty && (
-                <Repo.Stats>
-                  <FeatherIcon
-                    name="more-horizontal"
-                    size="2em"
-                    style={{ filter: 'drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2))' }}
-                  />
-                </Repo.Stats>
-              )}
-              {!repo.empty && renderRepoContents(repo)}
+              <h3>Error while fetching repositories</h3>
             </Repo>
-          ))}
-        {error && (
+          )}
           <Repo
+            href="https://github.com/Schlipak"
+            target="_blank"
+            rel="noopener noreferrer"
             palette={PALETTE}
             onMouseEnter={() => setCursorColorAction(Neutrals.white.medium)}
             onMouseLeave={resetCursorColorAction}
             center
           >
-            <h3>Error while fetching repositories</h3>
+            <h2>{t('repos.seeMore')}</h2>
           </Repo>
-        )}
-        <Repo
-          href="https://github.com/Schlipak"
-          target="_blank"
-          rel="noopener noreferrer"
-          palette={PALETTE}
-          onMouseEnter={() => setCursorColorAction(Neutrals.white.medium)}
-          onMouseLeave={resetCursorColorAction}
-          center
-        >
-          <h2>{t('repos.seeMore')}</h2>
-        </Repo>
-      </List>
+        </List>
+      </ErrorBoundary>
     </RepoListContainer>
   );
 };

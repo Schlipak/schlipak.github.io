@@ -13,6 +13,7 @@ import FormAnimation from './FormAnimation';
 
 import { Neutrals } from '../../constants';
 import successAnimation from '../../constants/animation-success';
+import ErrorBoundary from '../ErrorBoundary';
 
 const ContactWrapper = ResponsiveContainer();
 const Form = styled(ResponsiveContainer('form'))`
@@ -111,44 +112,46 @@ const ContactForm = ({ id }) => {
     <ContactWrapper>
       <SectionTitle>{t('navbar.contact')}</SectionTitle>
 
-      <Form id={id} onSubmit={handleSubmit} onInvalid={handleSubmit}>
-        <FormAnimation
-          animationData={successAnimation}
-          onComplete={() => clearAnimation(successRef)}
-          ref={successRef}
-        />
+      <ErrorBoundary>
+        <Form id={id} onSubmit={handleSubmit} onInvalid={handleSubmit}>
+          <FormAnimation
+            animationData={successAnimation}
+            onComplete={() => clearAnimation(successRef)}
+            ref={successRef}
+          />
 
-        <Input name="name" type="text" required ref={nameRef} disabled={disabled}>
-          {t('form.fields.name')}
-        </Input>
+          <Input name="name" type="text" required ref={nameRef} disabled={disabled}>
+            {t('form.fields.name')}
+          </Input>
 
-        <Input name="email" type="email" required ref={emailRef} disabled={disabled}>
-          {t('form.fields.email')}
-        </Input>
+          <Input name="email" type="email" required ref={emailRef} disabled={disabled}>
+            {t('form.fields.email')}
+          </Input>
 
-        <Input name="message" type="textarea" required ref={messageRef} disabled={disabled}>
-          {t('form.fields.message')}
-        </Input>
+          <Input name="message" type="textarea" required ref={messageRef} disabled={disabled}>
+            {t('form.fields.message')}
+          </Input>
 
-        <HiddenInput type="text" name="_gotcha" ref={gotchaRef} />
+          <HiddenInput type="text" name="_gotcha" ref={gotchaRef} />
 
-        <FormControls>
-          <Button
-            type="reset"
-            backgroundColor={[Neutrals.white.medium, Neutrals.white.dark]}
-            textColor={Neutrals.black.dark}
-            onClick={handleClear}
-            disabled={disabled}
-          >
-            <span>{t('form.controls.clear')}</span>
-          </Button>
+          <FormControls>
+            <Button
+              type="reset"
+              backgroundColor={[Neutrals.white.medium, Neutrals.white.dark]}
+              textColor={Neutrals.black.dark}
+              onClick={handleClear}
+              disabled={disabled}
+            >
+              <span>{t('form.controls.clear')}</span>
+            </Button>
 
-          <Button type="submit" disabled={disabled}>
-            <FeatherIcon name="send" />
-            <span>{t('form.controls.send')}</span>
-          </Button>
-        </FormControls>
-      </Form>
+            <Button type="submit" disabled={disabled}>
+              <FeatherIcon name="send" />
+              <span>{t('form.controls.send')}</span>
+            </Button>
+          </FormControls>
+        </Form>
+      </ErrorBoundary>
     </ContactWrapper>
   );
 };

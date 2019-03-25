@@ -17,6 +17,10 @@ export default (component = 'section') => styled(component)`
   }
 
   @media screen and (max-width: 900px) {
+    max-width: 700px;
+  }
+
+  @media screen and (max-width: 700px) {
     max-width: 500px;
   }
 `;

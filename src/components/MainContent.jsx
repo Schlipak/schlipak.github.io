@@ -5,8 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { Neutrals } from '../constants';
 import { education, experience } from '../constants/timelines';
 
-import Hero from './Sections/Hero';
+import ErrorBoundary from './ErrorBoundary';
 import ResponsiveContainer from './ResponsiveContainer';
+
+import Hero from './Sections/Hero';
 import SectionTitle from './SectionTitle';
 import Timeline from './Timeline';
 import RepoList from './Sections/RepoList';
@@ -58,13 +60,19 @@ export default () => {
         <MainContainer>
           <SectionContainer id="education">
             <SectionTitle>{t('navbar.education')}</SectionTitle>
-            <Timeline events={education} />
+            <ErrorBoundary>
+              <Timeline events={education} />
+            </ErrorBoundary>
           </SectionContainer>
           <SectionContainer id="experience">
             <SectionTitle>{t('navbar.experience')}</SectionTitle>
-            <Timeline events={experience} />
+            <ErrorBoundary>
+              <Timeline events={experience} />
+            </ErrorBoundary>
           </SectionContainer>
-          <RepoList id="projects" />
+          <SectionContainer>
+            <RepoList id="projects" />
+          </SectionContainer>
           <ContactForm id="contact" />
         </MainContainer>
         <Footer />
