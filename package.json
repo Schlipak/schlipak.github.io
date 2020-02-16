@@ -10,7 +10,7 @@
     "watch": "parcel index.html -d dist/ --host 0.0.0.0",
     "build": "parcel build index.html -d dist/",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --branch master"
+    "deploy": "gh-pages -d dist --branch master"
   },
   "staticFiles": {
     "staticPath": "assets",
