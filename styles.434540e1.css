@@ -1,0 +1,372 @@
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Thin.e2d14408.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-ThinSlanted.00bf8943.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Light.063ce109.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-LightSlanted.41855e9a.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Regular.b169b429.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Slanted.192b6240.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Medium.53b36b9f.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-MediumSlanted.3cbaf526.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Bold.c2fcd60a.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-BoldSlanted.afc37dc0.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Heavy.4c1793a5.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-HeavySlanted.099d11fe.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-Black.b6411990.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Object Sans";
+  src: url("/ObjectSans-BlackSlanted.e57be0ca.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input,
+textarea {
+  outline: 0;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+  outline: 0;
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  position: relative;
+}
+
+::selection {
+  color: #fff;
+  background: #000;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background: #fff;
+  font-family: "Object Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+html,
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  touch-action: none;
+  overflow: 0;
+}
+
+body {
+  background-color: #0a0a1e;
+  user-select: none;
+}
+body h1 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+canvas#scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
+
+footer {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 20px;
+  z-index: 900;
+}
+@media screen and (max-width: 900px) {
+  footer {
+    flex-direction: column;
+  }
+  footer aside:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+footer aside {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  animation-name: AnimIntroAsides;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+  animation-delay: 1s;
+}
+footer aside:nth-child(2) {
+  animation-delay: 1.25s;
+}
+footer aside a,
+footer aside p {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  transition: color 0.4s ease-in-out;
+  border: none;
+  outline: none;
+}
+footer aside a::-moz-focus-inner,
+footer aside p::-moz-focus-inner {
+  border: none;
+  outline: none;
+}
+footer aside a:not(:last-child)::after,
+footer aside p:not(:last-child)::after {
+  content: "";
+  display: block;
+  position: relative;
+  width: 3px;
+  height: 3px;
+  margin: 0 7px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+}
+footer aside p span {
+  margin-right: 0.5ch;
+}
+footer aside a {
+  transition: color 0.4s ease-in-out;
+}
+footer aside a:hover, footer aside a:focus {
+  color: white;
+}
+
+@keyframes AnimIntroAsides {
+  from {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=/styles.434540e1.css.map */
