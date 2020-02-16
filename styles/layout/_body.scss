@@ -1,0 +1,29 @@
+html,
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+
+  touch-action: none;
+  overflow: 0;
+}
+
+body {
+  background-color: rgba(10, 10, 30, 1);
+
+  user-select: none;
+
+  h1 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    opacity: 0;
+
+    user-select: none;
+    pointer-events: none;
+  }
+}

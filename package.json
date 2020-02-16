@@ -1,0 +1,30 @@
+{
+  "name": "folio",
+  "version": "1.0.0",
+  "description": "GDM Folio",
+  "main": "index.js",
+  "author": "Guillaume de Matos <gdematos@mashvp.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "watch": "parcel index.html -d dist/ --host 0.0.0.0",
+    "build": "parcel build index.html -d dist/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build --branch master"
+  },
+  "staticFiles": {
+    "staticPath": "assets",
+    "watcherGlob": "**"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "gh-pages": "^2.2.0",
+    "parcel": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.2.1",
+    "sass": "^1.23.3"
+  },
+  "dependencies": {
+    "ogl": "^0.0.40"
+  }
+}
