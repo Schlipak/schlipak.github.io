@@ -68,6 +68,11 @@ import { init, vert, frag } from './utils';
       }
     `;
 
+  const I = {
+    default: document.querySelector('meta[name="app:svg:default"]').getAttribute('content'),
+    touch: document.querySelector('meta[name="app:svg:touch"]').getAttribute('content')
+  };
+
   const S = {
     isTouchCapable: 'ontouchstart' in window,
     mouse: new Vec2(0.5),
@@ -78,7 +83,7 @@ import { init, vert, frag } from './utils';
 
     aspect: 1,
     image: {
-      url: './assets/img/gdm.svg',
+      url: '',
       size: { x: 1600, y: 1200 }
     },
 
@@ -206,9 +211,9 @@ import { init, vert, frag } from './utils';
     img.addEventListener('load', () => (S.texture.image = img));
 
     if (S.isTouchCapable) {
-      img.src = '/img/gdm_mobile.svg';
+      img.src = I.touch;
     } else {
-      img.src = '/img/gdm.svg';
+      img.src = I.default;
     }
 
     const { ah, av } = computeAspect();

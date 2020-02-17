@@ -15,12 +15,17 @@
   <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
   <meta name="theme-color" content="#0a0a1e">
 
-  <meta name="app:svg:default" content="/img/gdm.svg">
-  <meta name="app:svg:touch" content="/img/gdm_mobile.svg">
+  <meta name="app:svg:default" content="/img/404.svg">
+  <meta name="app:svg:touch" content="/img/404_mobile.svg">
 
   <title>Guillaume de Matos</title>
 
   <link rel="stylesheet" href="./styles/index.scss">
+  <style>
+    canvas {
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -38,12 +43,24 @@
     <aside class="social">
       <a href="https://twitter.com/0x467973" target="_blank" rel="noopener noreferrer">Twitter</a>
       <a href="https://github.com/Schlipak" target="_blank" rel="noopener noreferrer">Github</a>
-      <a href="https://www.linkedin.com/in/guillaume-de-matos-772066101/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/guillaume-de-matos-772066101/" target="_blank"
+        rel="noopener noreferrer">LinkedIn</a>
       <a href="javascript:window.location.href = 'mailto:' + ['gdematos','mashvp.com'].join('@')">E-mail</a>
     </aside>
   </footer>
 
   <script src="./src/index.js"></script>
+  <script>
+    (() => {
+      document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.querySelector('canvas');
+
+        canvas.addEventListener('click', () => {
+          location.href = '/';
+        });
+      });
+    })();
+  </script>
 </body>
 
 </html>

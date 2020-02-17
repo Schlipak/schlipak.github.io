@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "watch": "parcel index.html -d dist/ --host 0.0.0.0",
-    "build": "parcel build index.html -d dist/",
+    "watch": "parcel index.html 404.html -d dist/ --host 0.0.0.0",
+    "build": "parcel build index.html 404.html -d dist/",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --branch master"
   },
