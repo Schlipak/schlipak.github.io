@@ -117,7 +117,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/ogl/src/math/functions/Vec3Func.js":[function(require,module,exports) {
+})({"node_modules/tornis/dist/tornis.js":[function(require,module,exports) {
+var define;
+!function(t,i){"object"==typeof exports&&"undefined"!=typeof module?i(exports):"function"==typeof define&&define.amd?define(["exports"],i):(t=t||self,i(t.tornis={}))}(this,function(t){"use strict";function i(t,i){let s=0;return function(...e){const h=(new Date).getTime();if(!(h-s<t))return s=h,i(...e)}}function s(t){return Math.floor(t.reduce((t,i)=>t+i,0)/t.length)}const e="undefined"==typeof window;class h{constructor(){e||(this.lastX=0,this.lastY=0,this.lastWidth=window.innerWidth,this.lastHeight=window.innerHeight,this.lastMouseX=0,this.lastMouseY=0,this.lastWindowX=window.screenX,this.lastWindowY=window.screenY,this.lastAlpha=0,this.lastBeta=0,this.lastGamma=0,this.currAlpha=0,this.currBeta=0,this.currGamma=0,this.scrollHeight=document.body.scrollHeight,this.scrollChange=!1,this.sizeChange=!1,this.mouseChange=!1,this.positionChange=!1,this.orientationChange=!1,this.devicePixelRatioChange=!1,this.currX=0,this.currY=0,this.currWidth=window.innerWidth,this.currHeight=window.innerHeight,this.currMouseX=0,this.currMouseY=0,this.currWindowX=0,this.currDevicePixelRatio=this.lastDevicePixelRatio=Math.max(window.devicePixelRatio||1,1),this.mouseXVelocity=[],this.mouseYVelocity=[],this.lastMouseXVelocity=0,this.lastMouseYVelocity=0,this.windowXVelocity=[],this.windowYVelocity=[],this.lastWindowXVelocity=0,this.lastWindowYVelocity=0,this.updating=!1,this.callbacks=[],this.update=this.update.bind(this),this.handleResize=this.handleResize.bind(this),this.handleMouse=this.handleMouse.bind(this),this.handleOrientation=this.handleOrientation.bind(this),this.recalibrateOrientation=this.recalibrateOrientation.bind(this),this.formatData=this.formatData.bind(this),this.watch=this.watch.bind(this),this.unwatch=this.unwatch.bind(this),this.handleResize=i(110,this.handleResize),this.handleMouse=i(75,this.handleMouse),window.addEventListener("resize",this.handleResize),window.addEventListener("mousemove",this.handleMouse),window.addEventListener("deviceorientation",this.handleOrientation),requestAnimationFrame(this.update))}handleResize(t){this.currWidth=window.innerWidth,this.currHeight=window.innerHeight}handleMouse(t){this.currMouseX=t.clientX,this.currMouseY=t.clientY}handleOrientation(t){this.initialAlpha||(this.initialAlpha=t.alpha),this.initialBeta||(this.initialBeta=t.beta),this.initialGamma||(this.initialGamma=t.gamma),this.currAlpha=t.alpha,this.currBeta=t.beta,this.currGamma=t.gamma}recalibrateOrientation(){const t={prev:{alpha:this.initialAlpha,beta:this.initialBeta,gamma:this.initialGamma}};return this.initialAlpha=this.lastAlpha,this.initialBeta=this.lastBeta,this.initialGamma=this.lastGamma,t.current={alpha:this.initialAlpha,beta:this.initialBeta,gamma:this.initialGamma},t}formatData(){return{scroll:{changed:this.scrollChange,left:Math.floor(this.lastX),right:Math.floor(this.lastX+this.lastWidth),top:Math.floor(this.lastY),bottom:Math.floor(this.lastY+this.lastHeight),velocity:{x:Math.floor(this.scrollXVelocity)||0,y:Math.floor(this.scrollYVelocity)||0}},size:{changed:this.sizeChange,x:Math.floor(this.lastWidth),y:Math.floor(this.lastHeight),docY:Math.floor(this.scrollHeight)},mouse:{changed:this.mouseChange,x:Math.floor(this.lastMouseX),y:Math.floor(this.lastMouseY),velocity:{x:Math.floor(this.lastMouseXVelocity)||0,y:Math.floor(this.lastMouseYVelocity)||0}},position:{changed:this.positionChange,left:Math.floor(this.lastWindowX),right:Math.floor(this.lastWindowX+this.lastWidth),top:Math.floor(this.lastWindowY),bottom:Math.floor(this.lastWindowY+this.lastHeight),velocity:{x:Math.floor(this.lastWindowXVelocity)||0,y:Math.floor(this.lastWindowYVelocity)||0}},orientation:{changed:this.orientationChange,alpha:Math.floor(this.lastAlpha-this.initialAlpha)||0,beta:Math.floor(this.lastBeta-this.initialBeta)||0,gamma:Math.floor(this.lastGamma-this.initialGamma)||0},devicePixelRatio:{changed:this.devicePixelRatioChange,ratio:this.currDevicePixelRatio}}}update(){const{currWidth:currWidth,currHeight:currHeight,currMouseX:currMouseX,currMouseY:currMouseY,currAlpha:currAlpha,currBeta:currBeta,currGamma:currGamma,currDevicePixelRatio:currDevicePixelRatio}=this;if(this.updating)return!1;this.scrollChange=this.sizeChange=this.mouseChange=this.positionChange=this.orientationChange=this.devicePixelRatioChange=!1,this.windowXVelocity.length>5&&this.windowXVelocity.shift(),this.windowXVelocity.push(window.screenX-this.lastWindowX),s(this.windowXVelocity)!=this.lastWindowXVelocity&&(this.lastWindowXVelocity=s(this.windowXVelocity),this.positionChange=!0),window.screenX!=this.lastWindowX&&(this.positionChange=!0,this.lastWindowX=window.screenX),this.windowYVelocity.length>5&&this.windowYVelocity.shift(),this.windowYVelocity.push(window.screenY-this.lastWindowY),s(this.windowYVelocity)!=this.lastWindowYVelocity&&(this.lastWindowYVelocity=s(this.windowYVelocity),this.positionChange=!0),window.screenY!=this.lastWindowY&&(this.positionChange=!0,this.lastWindowY=window.screenY),window.pageXOffset==this.lastX&&0!=this.scrollXVelocity&&(this.scrollXVelocity=0,this.scrollChange=!0),window.pageYOffset==this.lastY&&0!=this.scrollYVelocity&&(this.scrollYVelocity=0,this.scrollChange=!0),window.pageXOffset!=this.lastX&&(this.scrollChange=!0,this.scrollXVelocity=Math.floor(window.pageXOffset-this.lastX),this.lastX=window.pageXOffset),window.pageYOffset!=this.lastY&&(this.scrollChange=!0,this.scrollYVelocity=Math.floor(window.pageYOffset-this.lastY),this.lastY=window.pageYOffset),currWidth!=this.lastWidth&&(this.lastWidth=currWidth,this.scrollHeight=document.body.scrollHeight,this.sizeChange=!0),currHeight!=this.lastHeight&&(this.lastHeight=currHeight,this.sizeChange=!0),this.mouseXVelocity.length>5&&this.mouseXVelocity.shift(),this.mouseXVelocity.push(currMouseX-this.lastMouseX),s(this.mouseXVelocity)!=this.lastMouseXVelocity&&(this.lastMouseXVelocity=s(this.mouseXVelocity),this.mouseChange=!0),currMouseX!=this.lastMouseX&&(this.lastMouseX=currMouseX,this.mouseChange=!0),this.mouseYVelocity.length>5&&this.mouseYVelocity.shift(),this.mouseYVelocity.push(currMouseY-this.lastMouseY),s(this.mouseYVelocity)!=this.lastMouseYVelocity&&(this.lastMouseYVelocity=s(this.mouseYVelocity),this.mouseChange=!0),currMouseY==this.lastMouseY&&0==s(this.mouseYVelocity)||(this.lastMouseY=currMouseY,this.mouseChange=!0),currAlpha!=this.lastAlpha&&(this.lastAlpha=currAlpha,this.orientationChange=!0),currBeta!=this.lastBeta&&(this.lastBeta=currBeta,this.orientationChange=!0),currGamma!=this.lastGamma&&(this.lastGamma=currGamma,this.orientationChange=!0),(this.positionChange||this.sizeChange)&&(this.currDevicePixelRatio=Math.max(window.devicePixelRatio||1,1),this.currDevicePixelRatio!==this.lastDevicePixelRatio&&(this.devicePixelRatioChange=!0,this.lastDevicePixelRatio=this.currDevicePixelRatio)),(this.scrollChange||this.sizeChange||this.mouseChange||this.positionChange||this.orientationChange||this.devicePixelRatioChange)&&this.callbacks.forEach(t=>t(this.formatData())),this.updating=!1,requestAnimationFrame(this.update)}watch(t,i=!0){if("function"!=typeof t)throw new Error("Value passed to Watch is not a function");if(!e){if(i){const i=this.formatData();i.scroll.changed=!0,i.mouse.changed=!0,i.size.changed=!0,i.position.changed=!0,i.orientation.changed=!0,i.devicePixelRatio.changed=!0,t(i)}this.callbacks.push(t)}}unwatch(t){if("function"!=typeof t)throw new Error("The value passed to unwatch is not a function");e||(this.callbacks=this.callbacks.filter(i=>i!==t))}}const a=new h;e||(window.__TORNIS={watchViewport:a.watch,unwatchViewport:a.unwatch,getViewportState:a.formatData,recalibrateOrientation:a.recalibrateOrientation});const o=a.watch,n=a.unwatch,l=a.formatData,c=a.recalibrateOrientation;t.getViewportState=l,t.recalibrateOrientation=c,t.unwatchViewport=n,t.watchViewport=o,Object.defineProperty(t,"__esModule",{value:!0})});
+
+},{}],"node_modules/ogl/src/math/functions/Vec3Func.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8926,7 +8930,7 @@ var vert = shaderTaggedTemplateLiteral;
 exports.vert = vert;
 var frag = shaderTaggedTemplateLiteral;
 exports.frag = frag;
-},{}],"src/index.js":[function(require,module,exports) {
+},{}],"src/glsl-app.js":[function(require,module,exports) {
 "use strict";
 
 var _ogl = require("ogl");
@@ -8934,7 +8938,7 @@ var _ogl = require("ogl");
 var _utils = require("./utils");
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n      precision highp float;\n      precision highp int;\n\n      varying vec2 vUv;\n\n      uniform float uTime;\n      uniform vec2 uMouse;\n      uniform float uUseMouse;\n      uniform float uNoiseMultiplier;\n      uniform sampler2D uWater;\n      uniform sampler2D uFlow;\n      uniform vec4 res;\n\n      const float PI  = 3.141592653;\n      const float PHI = 1.618033988;\n\n      float gold_noise(in vec2 xy, in float seed) {\n        return fract(tan(distance(xy * PHI, xy) * seed) * xy.x);\n      }\n\n      void main() {\n        vec3 flow = texture2D(uFlow, vUv).rgb;\n        vec2 uv = 0.5 * gl_FragCoord.xy / res.xy ;\n\n        vec3 noise = vec3(gold_noise(uv.xy * res.xy + vec2(0.9, 0.0), mod(uTime, 1000.0)));\n        float progress = clamp(((uTime * 0.5) - 10.0) / 30.0, 0.0, 1.0);\n\n        vec2 offset = (uMouse - vec2(0.5)) * (0.1 * 0.05) * uUseMouse;\n        vec2 myUV = (uv - vec2(0.5)) * res.zw + vec2(0.5) + offset;\n\n        myUV -= flow.xy * (0.015 * 0.2) * (noise.xy * uNoiseMultiplier);\n\n        vec3 tex = texture2D(uWater, myUV).rgb;\n        vec3 flowTex = (vec3(0.02) + (tex.rgb * (0.75 + (3.0 * progress))) + (noise * 0.2)) *\n                       (vec3(0.2, 0.2, 0.4) + ((vec3(0.3) + tex.rgb) * flow * noise * 2.0));\n\n        gl_FragColor = vec4(clamp(flowTex, vec3(0.0), vec3(1.0)), tex.r);\n      }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      precision highp float;\n      precision highp int;\n\n      varying vec2 vUv;\n\n      uniform float uTime;\n      uniform vec2 uMouse;\n      uniform float uUseMouse;\n      uniform float uNoiseMultiplier;\n      uniform sampler2D uWater;\n      uniform sampler2D uFlow;\n      uniform vec4 res;\n\n      const float PI  = 3.141592653;\n      const float TAU = PI * 2.0;\n      const float PHI = 1.618033988;\n\n      float gold_noise(in vec2 xy, in float seed) {\n        return fract(tan(distance(xy * PHI, xy) * seed) * xy.x);\n      }\n\n      vec3 hueShift(vec3 color, float hueAdjust) {\n        const vec3  kRGBToYPrime = vec3 (0.299, 0.587, 0.114);\n        const vec3  kRGBToI      = vec3 (0.596, -0.275, -0.321);\n        const vec3  kRGBToQ      = vec3 (0.212, -0.523, 0.311);\n\n        const vec3  kYIQToR     = vec3 (1.0, 0.956, 0.621);\n        const vec3  kYIQToG     = vec3 (1.0, -0.272, -0.647);\n        const vec3  kYIQToB     = vec3 (1.0, -1.107, 1.704);\n\n        float   YPrime  = dot (color, kRGBToYPrime);\n        float   I       = dot (color, kRGBToI);\n        float   Q       = dot (color, kRGBToQ);\n        float   hue     = atan (Q, I);\n        float   chroma  = sqrt (I * I + Q * Q);\n\n        hue += hueAdjust;\n\n        Q = chroma * sin (hue);\n        I = chroma * cos (hue);\n\n        vec3    yIQ   = vec3 (YPrime, I, Q);\n\n        return vec3( dot (yIQ, kYIQToR), dot (yIQ, kYIQToG), dot (yIQ, kYIQToB) );\n    }\n\n      void main() {\n        vec3 flow = texture2D(uFlow, vUv).rgb;\n        vec2 uv = 0.5 * gl_FragCoord.xy / res.xy ;\n\n        vec3 noise = vec3(gold_noise(uv.xy * res.xy + vec2(0.9, 0.0), mod(uTime, 100.0)));\n\n        float progress = clamp(((uTime * 0.5) - 10.0) / 30.0, 0.0, 1.0);\n        float angle = mod(uTime / 100.0, TAU);\n\n        vec2 offset = (uMouse - vec2(0.5)) * (0.1 * 0.05) * uUseMouse;\n        vec2 myUV = (uv - vec2(0.5)) * res.zw + vec2(0.5) + offset;\n\n        myUV -= flow.xy * (0.015 * 0.2) * (noise.xy * uNoiseMultiplier);\n\n        vec3 tex = texture2D(uWater, myUV).rgb * progress;\n        vec3 flowTex = (vec3(0.02) + (tex.rgb * (0.75 + (3.0 * progress))) + (noise * 0.25)) *\n                       (vec3(0.2, 0.2, 0.4) + ((vec3(0.3) + tex.rgb) * flow * noise * 2.0));\n\n        flowTex = hueShift(flowTex, angle);\n        gl_FragColor = vec4(clamp(flowTex, vec3(0.0), vec3(1.0)), tex.r);\n      }\n    "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -9116,7 +9120,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
           value: S.isTouchCapable ? 0.0 : 1.0
         },
         uNoiseMultiplier: {
-          value: S.isTouchCapable ? 16.0 : 3.0
+          value: S.isTouchCapable ? 16.0 : 6.0
         },
         uWater: {
           value: S.texture
@@ -9169,7 +9173,57 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
     requestAnimationFrame(update);
   });
 })();
-},{"ogl":"node_modules/ogl/src/index.mjs","./utils":"src/utils.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"ogl":"node_modules/ogl/src/index.mjs","./utils":"src/utils.js"}],"src/index.js":[function(require,module,exports) {
+"use strict";
+
+var _tornis = require("tornis");
+
+require("./glsl-app");
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+(function () {
+  var init = function init() {
+    var cursor = document.getElementById('cursor');
+
+    if (!('ontouchstart' in window) && cursor) {
+      document.body.classList.add('js--no-cursor');
+      (0, _tornis.watchViewport)(function (_ref) {
+        var mouse = _ref.mouse;
+
+        if (mouse.changed) {
+          var x = mouse.x,
+              y = mouse.y,
+              velocity = mouse.velocity;
+          var vx = velocity.x,
+              vy = velocity.y;
+          var dv = Math.abs(Math.pow(vx, 2) + Math.pow(vy, 2));
+          var opacity = 1 - Math.min(dv, 30) / 50;
+          cursor.style.transform = "translate3D(".concat(x, "px, ").concat(y, "px, 0)");
+          cursor.style.opacity = opacity;
+        }
+      });
+
+      _toConsumableArray(document.querySelectorAll('a')).forEach(function (anchor) {
+        anchor.addEventListener('mouseenter', function () {
+          return document.body.classList.add('js--cursor-hover');
+        });
+        anchor.addEventListener('mouseleave', function () {
+          return document.body.classList.remove('js--cursor-hover');
+        });
+      });
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+},{"tornis":"node_modules/tornis/dist/tornis.js","./glsl-app":"src/glsl-app.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -9197,7 +9251,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "0.0.0.0" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40185" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36889" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
