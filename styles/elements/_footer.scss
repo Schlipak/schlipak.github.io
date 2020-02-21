@@ -7,7 +7,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100vw;
-  padding: 20px;
+  padding: 10px 20px;
 
   z-index: 900;
 
@@ -42,6 +42,7 @@ footer {
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
+      padding: 10px 0;
 
       text-decoration: none;
       color: rgba(white, 0.5);
@@ -58,13 +59,15 @@ footer {
       }
 
       &:not(:last-child) {
+        margin-right: 20px;
+
         &::after {
           content: '';
           display: block;
-          position: relative;
+          position: absolute;
+          left: calc(100% + 8.5px);
           width: 3px;
           height: 3px;
-          margin: 0 7px;
 
           background-color: rgba(white, 0.5);
           border-radius: 50%;

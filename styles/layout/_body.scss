@@ -26,4 +26,67 @@ body {
     user-select: none;
     pointer-events: none;
   }
+
+  &.js--no-cursor {
+    cursor: none;
+
+    a,
+    button {
+      cursor: none;
+    }
+
+    #cursor {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      transform-origin: center;
+      transition-property: transform, opacity;
+      transition-duration: 0.4s, 0.8s;
+      transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+      mix-blend-mode: difference;
+
+      pointer-events: none;
+      z-index: 999;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 40px;
+        height: 40px;
+
+        transform: scale(0.25);
+        transform-origin: center;
+        transition-property: transform;
+        transition-duration: 0.8s;
+        transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+        background-color: white;
+        border-radius: 50%;
+      }
+    }
+
+    &:not(:hover) {
+      #cursor {
+        opacity: 0;
+
+        &::before {
+          transform: scale(0);
+        }
+      }
+    }
+
+    &.js--cursor-hover {
+      #cursor {
+        &::before {
+          transform: scale(1);
+        }
+      }
+    }
+  }
 }
